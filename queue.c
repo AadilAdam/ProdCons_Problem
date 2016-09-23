@@ -1,10 +1,12 @@
-/************************************************************************************************************************
+/***********************************************************************************************************************************
 NAME:         AADIL AHMED ADAM
 CLASS:        CS590 SECTION 01
 SEMESTER:     SUMMER 2016
-DESCRIPTION:  FINAL EXAM PROJECT TO DEMOSTRATE THE USE OF PTHREAD LIBRARY TO WRITE A C PROGRAM THAT CREATES A NUMBER OF PRODUCER AND CONSUMER THRAEDS. THE PRODUCER THREADS WILL GENERATE RANDOM NUMBERS TO BE STORED IN A CIRCULAR QUEUE. THE CONSUMER THREADS WILL REMOVE THE ELEMENTS FROM THE CIRCULAR QUEUE.
+DESCRIPTION:  FINAL EXAM PROJECT TO DEMOSTRATE THE USE OF PTHREAD LIBRARY TO WRITE A C PROGRAM THAT CREATES A NUMBER OF PRODUCER
+AND CONSUMER THRAEDS. THE PRODUCER THREADS WILL GENERATE RANDOM NUMBERS TO BE STORED IN A CIRCULAR QUEUE. THE CONSUMER THREADS WILL
+REMOVE THE ELEMENTS FROM THE CIRCULAR QUEUE.
 
-*******************8*****************************************************************************************************/
+************************************************************************************************************************************/
 
 //HEADER FILES
 #include <stdlib.h>
@@ -13,6 +15,7 @@ DESCRIPTION:  FINAL EXAM PROJECT TO DEMOSTRATE THE USE OF PTHREAD LIBRARY TO WRI
 #define size 100  // QUEUE SIZE
 
 
+//initializations
 pthread_mutex_t pcmutex;
 pthread_cond_t condcon, condpro;
 int queue[size], front= -1, rear=-1;
@@ -48,7 +51,8 @@ void *producer(void *pro_pr)
 		//check if queue is full
 		while(queue_full()){
 			printf("Queue Overflow... Wait for the consumer to consume...\n");
-			pthread_cond_wait(&condpro, &pcmutex);   //if queue is full then tell the producer to wait for the consumer to consume
+			pthread_cond_wait(&condpro, &pcmutex);   
+			//if queue is full then tell the producer to wait for the consumer to consume
 		}
 
 		if (front==-1){
